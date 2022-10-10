@@ -1,6 +1,6 @@
 import pygame
 
-ventana = pygame.display.set_mode((624,360));
+ventana = pygame.display.set_mode((1280,720));
 
 pygame.init()
 
