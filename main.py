@@ -1,18 +1,28 @@
+import sys
 import pygame
+import constantes as c
+import Elementos.Resortera
 
-ventana = pygame.display.set_mode((1280,720));
+ventana = pygame.display.set_mode(c.RESOLUCION);
 
 pygame.init()
 
-ejecutar = True
+reloj = pygame.time.Clock()
 
-fondo = pygame.image.load("./Assets/fondo.jpg")
+def cerrar():
+  pygame.quit()
+  sys.exit()
 
-
-while ejecutar:
-
+while True:
+  dt = reloj.tick(c.FPS)/1000
+  # print(dt)
+  # if (mouse[0])
+  
   for event in pygame.event.get():
-    if event.type == pygame.QUIT: ejecutar = False
-  ventana.blit(fondo,(0,0))
+    if event.type == pygame.QUIT: cerrar()
+  
+  b_mouse = pygame.mouse.get_pressed()
+  p_mouse = pygame.mouse.get_pos()
+
 
   pygame.display.update()
