@@ -50,7 +50,7 @@ while True:
     v_dist = centro-p_mouse
     dist = v_dist.magnitude()
     if dist==0:
-      dir = pygame.Vecto2()
+      dir = pygame.Vector2()
     else: dir = v_dist.normalize()
     
     if (dist>=c.RADIO_MAX): 
