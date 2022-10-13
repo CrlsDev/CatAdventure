@@ -1,6 +1,6 @@
 RESOLUCION = (1280,720)
 
-FPS = 60
+FPS = 120
 img_resortera = "./Assets/Resortera.png"
 
 P = 4
