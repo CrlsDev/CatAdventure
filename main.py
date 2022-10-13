@@ -1,4 +1,4 @@
-gimport sys
+import sys
 import pygame
 import constantes as c
 from Elementos.Resortera import *
