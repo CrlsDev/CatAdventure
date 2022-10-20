@@ -1,6 +1,6 @@
 
 import pygame
-from Elementos.sujeto import SujetoFisico
+from elementos.sujeto import SujetoFisico
 from utiles import loader
 
 class Gato(SujetoFisico):
