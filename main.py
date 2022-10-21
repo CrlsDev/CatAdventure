@@ -1,8 +1,8 @@
 import sys
 import pygame
 import constantes as c
-from elementos.Resortera import *
-from elementos.Pajaro import *
+from Elementos.Resortera import *
+from Elementos.Pajaro import *
 
 ventana = pygame.display.set_mode(c.RESOLUCION);
 
@@ -18,36 +18,26 @@ lanzamiento = False
 
 dir = None
 dist = None
-p_mouse = pygame.Vector2()
-b_mouse = False
+
 def cerrar():
   pygame.quit()
   sys.exit()
-pygame.event.set_allowed(False)
+
 while True:
   dt = reloj.tick(c.FPS)/1000
   # print(dt)
   # if (mouse[0])
   
   for event in pygame.event.get():
-    event:pygame.event.Event
     if event.type == pygame.QUIT: cerrar()
-    if event.type==pygame.KEYDOWN:
-      if event.key==pygame.K_ESCAPE:
-        cerrar()
-    if event.type == pygame.MOUSEMOTION:
-      p_mouse = pygame.Vector2(event.pos)
-    if event.type == pygame.MOUSEBUTTONDOWN:
-      if (event.button==1): b_mouse = True
-    if event.type == pygame.MOUSEBUTTONUP:
-      if (event.button==1): b_mouse = False
-  print(p_mouse)
-
+  
+  b_mouse = pygame.mouse.get_pressed()
+  p_mouse = pygame.Vector2(pygame.mouse.get_pos())
   if (not tirando and not disparo):
     if (p_mouse.x>resort.pos.x and p_mouse.x<resort.pos.x+resort.tam.x and p_mouse.y>resort.pos.y and p_mouse.y<resort.pos.y+resort.tam.y): 
-      if (b_mouse):
+      if (b_mouse[0]):
           tirando = True
-  elif not b_mouse: 
+  elif not b_mouse[0]: 
     
     disparo = True
     
