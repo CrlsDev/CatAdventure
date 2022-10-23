@@ -1,8 +1,3 @@
-from grupos import GrupoRenderizar,GrupoFisico
-from eventos import *
+from utiles.grupos import GrupoRenderizar,GrupoFisico
+from utiles.events import *
 
-MnjEventos.TEventos.append(EventoTeclado)
-MnjEventos.TEventos.append(EventoMouse)
-
-for T in MnjEventos.TEventos:
-  pass

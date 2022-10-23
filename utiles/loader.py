@@ -1,19 +1,54 @@
 import pygame
 import os
+from enum import Enum
 
-IMGS = {}
-IMGS_ACCEPTED = [".jpg",".png"]
+ats = ["images","sounds","fonts"]
 
+class Admited():
+  IMG = [".png",".jpg"]
 
-def inicio():
-  cargar_imagenes()
+class AssetsContainer():
+  def __init__(self):
+    for at in ats:
+      self.__setattr__(at,{})
+  def check(self,key):
+    return key in self.__dict__.keys()
 
-
-def cargar_imagenes():
+  def __repr__(self) -> str:
+    return str(self.__dict__)
   
-  for img in os.listdir("./Assets"):
-    n,e = os.path.splitext(img)
+  def __str__(self) -> str:
+    return self.__repr__()
+
+class Loader():
+  
+  def __init__(self,assets_dir):
+    self.assets_dir = assets_dir
+    self.container = AssetsContainer()
+
     
-    if (e.lower() in IMGS_ACCEPTED):
-      IMGS[n] = pygame.image.load(os.path.join("./Assets",img))
+
+  def __getDir(self,key):
+    return os.path.join(self.assets_dir,key)
+
+  def loadAll(self):
+    self.loadImages()
+    self.loadAudios()
+    self.loadFonts()
+
+  def loadImages(self):
+    self.__load(ats[0],Admited.IMG)
+  def loadAudios(self):
+    self.__load(self.sounds)
+  def loadFonts(self):
+    self.__load(self.fonts)
+
+  def __load(self,key,admited=None,forced = False):
+    container = self.container.__getattribute__(key)
+    dir = self.__getDir(key)
+    for asset in os.listdir(dir):
+      n,e = os.path.splitext(asset)
+      if ((e.lower() in admited or admited is None) and (not self.container.check(n) or forced)):
+        container[n] = pygame.image.load(os.path.join(dir,asset))
+
 
