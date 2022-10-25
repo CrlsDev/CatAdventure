@@ -2,7 +2,7 @@ import math
 import sys
 import pygame
 from elementos import *
-import states.abstract as abstate
+from states import *
 import constantes as c
 from metodos import *
 from utiles import *
@@ -10,13 +10,14 @@ from utiles import *
 
 
 @singleton
-class Juego():
+class Game():
   estado: None
-  def __init__(self):
+  def __init__(self,state):
     self.ventana = pygame.display.set_mode(c.RESOLUCION);
     self.reloj = pygame.time.Clock()
-    
+    self.state = state
     pygame.init()
+    
   def game_loop(self):
     while True:
       dt = self.reloj.tick(c.FPS)/1000

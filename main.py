@@ -1,8 +1,9 @@
-from juego import *
-from utiles.loader import Loader
+from game import *
 
 def main():
-  abstate.AbstractState()
+  juego = Game(AbstractState())
+  juego.run()
+
 
 
 if __name__=="__main__":

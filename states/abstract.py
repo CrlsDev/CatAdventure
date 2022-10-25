@@ -1,13 +1,13 @@
 
 import utiles
-
-class AbstractState():
+from abc import ABC, abstractmethod
+class AbstractState(ABC):
   def __init__(self):
     self.EvnMng = utiles.EventManager()
-
+  
   def handle_events(self):
-    pass
-
+    self.EvnMng.Update()
+  
   def update(self):
     pass
 
