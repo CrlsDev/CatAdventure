@@ -1,3 +1,3 @@
-from utiles.grupos import GrupoRenderizar,GrupoFisico
+from utiles.grupos import RenderGroup,PhysicGroup
 from utiles.events import *
 

@@ -1,4 +1,5 @@
 
+from pygame import Surface
 import utiles
 from abc import ABC, abstractmethod
 class AbstractState(ABC):
@@ -6,10 +7,10 @@ class AbstractState(ABC):
     self.EvnMng = utiles.EventManager()
   
   def handle_events(self):
-    self.EvnMng.Update()
+    self.EvnMng.handle()
   
   def update(self):
     pass
 
-  def render(self):
+  def render(self, ventana:Surface):
     pass

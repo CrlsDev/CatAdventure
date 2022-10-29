@@ -1,0 +1,1 @@
+POTENCIA = 4

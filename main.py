@@ -1,7 +1,8 @@
 from game import *
+from states.pruebas import TestState
 
 def main():
-  juego = Game(AbstractState())
+  juego = Game(TestState())
   juego.run()
 
 

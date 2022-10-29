@@ -1,12 +1,14 @@
 import pygame
 from pygame.sprite import Group
 
-class GrupoRenderizar(Group):
+class RenderGroup(Group):
   def __init__(self,*Sprites:pygame.sprite.Sprite):
     super().__init__(Sprites)
 
+  
 
-class GrupoFisico(GrupoRenderizar):
+class PhysicGroup(RenderGroup):
 
   def __init__(self,*Sprites:pygame.sprite.Sprite):
     super().__init__(Sprites)
+    

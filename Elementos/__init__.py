@@ -1,2 +1,2 @@
 from elementos.gato import Gato
-from elementos.sujeto import Sujeto,SujetoFisico
+from elementos.element import Element,PhysicElement

@@ -1,12 +1,18 @@
 
 import pygame
-from elementos.sujeto import SujetoFisico
-from utiles import loader
-
-class Gato(SujetoFisico):
+from elementos.element import PhysicElement
+from utiles.loader import Loader
+L = Loader("./Assets")
+L.loadImages()
+class Gato(PhysicElement):
   def __init__(self, *grupos):
-    SujetoFisico.__init__(self,(0,0,25,25),loader.IMGS["CAT"],grupos)
-    
+    print(L.container.images["CAT"])
+    PhysicElement.__init__(self,(400,400,100,100),L.getImage("CAT"),grupos)
+  
+  def update(self):
+    pass
+  
+
   
 
     

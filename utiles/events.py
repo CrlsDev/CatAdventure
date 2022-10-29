@@ -26,6 +26,7 @@ class EventManager():
   
   def handle_quit_events(self,evn):
     if evn.type==pygame.QUIT: self.cerrar()
+    
   @staticmethod
   def __handle_dict(evn,events_dict):
     for denv in events_dict:

@@ -2,7 +2,7 @@ import pygame
 import os
 from enum import Enum
 
-ats = ["images","sounds","fonts"]
+ats = ["images","sounds","fonts","music"]
 
 class Admited():
   IMG = [".png",".jpg"]
@@ -11,9 +11,10 @@ class AssetsContainer():
   def __init__(self):
     for at in ats:
       self.__setattr__(at,{})
+      self.__setattr__(f"check_{at}",lambda key: key in self.__dict__[at].keys())
   def check(self,key):
     return key in self.__dict__.keys()
-
+  
   def __repr__(self) -> str:
     return str(self.__dict__)
   
@@ -27,7 +28,9 @@ class Loader():
     self.container = AssetsContainer()
 
     
-
+  def getImage(self,image:str):
+    if self.container.check_images(image):
+      return self.container.images[image]
   def __getDir(self,key):
     return os.path.join(self.assets_dir,key)
 
