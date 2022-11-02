@@ -11,10 +11,12 @@ class AssetsContainer():
   def __init__(self):
     for at in ats:
       self.__setattr__(at,{})
-      self.__setattr__(f"check_{at}",lambda key: key in self.__dict__[at].keys())
+      self.__setattr__(f"check_{at}",lambda key: key in self.__dict__[str(at)].keys())
+  
   def check(self,key):
     return key in self.__dict__.keys()
-  
+  def __create_check_function(self):
+    pass
   def __repr__(self) -> str:
     return str(self.__dict__)
   
