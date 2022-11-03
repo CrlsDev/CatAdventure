@@ -11,12 +11,12 @@ class AssetsContainer():
   def __init__(self):
     for at in ats:
       self.__setattr__(at,{})
-      self.__setattr__(f"check_{at}",lambda key: key in self.__dict__[str(at)].keys())
+      self.__create_check_function(at)
   
   def check(self,key):
     return key in self.__dict__.keys()
-  def __create_check_function(self):
-    pass
+  def __create_check_function(self,objetive):
+    self.__setattr__(f"check_{objetive}",lambda key: key in self.__dict__[str(objetive)].keys())
   def __repr__(self) -> str:
     return str(self.__dict__)
   
@@ -54,6 +54,6 @@ class Loader():
     for asset in os.listdir(dir):
       n,e = os.path.splitext(asset)
       if ((e.lower() in admited or admited is None) and (not self.container.check(n) or forced)):
-        container[n] = pygame.image.load(os.path.join(dir,asset))
+        container[n] = pygame.image.load(os.path.join(dir,asset)).convert_alpha()
 
 

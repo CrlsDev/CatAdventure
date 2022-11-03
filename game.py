@@ -19,8 +19,7 @@ class Game():
 
   def run(self):
     pygame.init()
-    g = Gato(self.state.renderGroup)
-    
+       
     self.game_loop()  
   def game_loop(self):
     while True:
@@ -28,7 +27,7 @@ class Game():
       # print(dt)
       # if (mouse[0])
       self.state.handle_events()
-      self.state.update()
+      self.state.update(dt)
       self.ventana.fill((0,0,0))
       self.state.render(self.ventana)
       pygame.display.update()

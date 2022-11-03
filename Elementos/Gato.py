@@ -6,11 +6,14 @@ L = Loader("./Assets")
 L.loadImages()
 class Gato(PhysicElement):
   def __init__(self, *grupos):
-    print(L.container.check_images("CAT"))
     PhysicElement.__init__(self,(400,400,100,100),L.getImage("CAT"),grupos)
+    # self.acc.y=10
+    # self.vel.x = 10
+  def update(self,dt):
+    super().update(dt)
   
-  def update(self):
-    pass
+  
+    
   
 
   
