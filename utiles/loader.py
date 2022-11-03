@@ -54,6 +54,6 @@ class Loader():
     for asset in os.listdir(dir):
       n,e = os.path.splitext(asset)
       if ((e.lower() in admited or admited is None) and (not self.container.check(n) or forced)):
-        container[n] = pygame.image.load(os.path.join(dir,asset)).convert_alpha()
+        container[n] = pygame.image.load(os.path.join(dir,asset))
 
 

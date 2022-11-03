@@ -11,19 +11,40 @@ TODO:
 4. Fluidos
 5. 
 """
+
+UP = pygame.Vector2(0,-1)
+DOWN = pygame.Vector2(0,1)
+LEFT = pygame.Vector2(-1,0)
+RIGHT = pygame.Vector2(1,0)
+
 class Physics():
   def __init__(self):
     pass
+  def betweenRect(point, rect):
+    return (Physics.between(point.x,(rect.x,rect.x+rect.w))
+      and Physics.between(point.y,(rect.y,rect.y+rect.h))
+    )
 
-  def MParabolico(PE,dt:float):
-    PE.vel += PE.acc*dt
-    print(PE.vel)
-    PE.pos += ((PE.acc/2)*dt*dt)+(PE.vel*dt)
-  def VelDirection(PE):
-    return math.atan2(PE.vel.y,PE.vel.x)
+  def between(n,r):
+    return n>=r[0] and n<=r[1]
+  def CompPosition(dt,acc,vel,pos):
+    pos += ((acc/2)*dt*dt)+(vel*dt)
+  def CompVelocity(dt, acc, vel):
+    vel += acc*dt
+
+  def MParabolico():
+    pass
+  def getVectorByDir(degrees):
+    rad = math.radians(degrees)
+    return pygame.Vector2(
+      math.cos(rad),
+      math.sin(rad)
+    )
+  def VelDirection(vec):
+    return -math.degrees(math.atan2(vec.y,vec.x))
     
-  def CalcPotencia(PE, vector_director:pygame.Vector2):
-    PE.vel = POTENCIA*vector_director
+  def CalcPotencia(dir):
+    return (POTENCIA*dir)
 
   def CalcVecDir(mouse:pygame.Vector2,center:pygame.Vector2):
     return center-mouse

@@ -16,9 +16,9 @@ class Game():
     self.ventana = pygame.display.set_mode(c.RESOLUCION);
     self.reloj = pygame.time.Clock()
     self.state:AbstractState = state
-
   def run(self):
     pygame.init()
+    self.state.init(self.ventana.get_rect())
        
     self.game_loop()  
   def game_loop(self):
@@ -28,7 +28,6 @@ class Game():
       # if (mouse[0])
       self.state.handle_events()
       self.state.update(dt)
-      self.ventana.fill((0,0,0))
       self.state.render(self.ventana)
       pygame.display.update()
 
