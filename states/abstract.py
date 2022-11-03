@@ -9,7 +9,7 @@ class AbstractState(ABC):
   def handle_events(self):
     self.EvnMng.handle()
   
-  def update(self):
+  def update(self,dt):
     pass
 
   def render(self, ventana:Surface):
