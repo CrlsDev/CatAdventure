@@ -16,11 +16,9 @@ class Element(Sprite):
   def render(self,surf:pygame.Surface):
     surf.blit(self.image,self.rect)
 
-class ImageElement():
+class ImageElement(Element):
   def __init__(self,rect,image, *grps):
-    print(grps)
-    Element.__init__(grps)
-    print(self.rect)
+    Element.__init__(self,grps)
     self.rect = pygame.Rect(rect)
     self.image = pygame.transform.scale(image,self.rect.size)
 
@@ -51,23 +49,35 @@ class ChargeIndicator(Element):
 class PhysicElement(Element):
   
 
-  def __init__(self,hitbox:pygame.Rect, *grps):
+  def __init__(self,hitbox:pygame.Rect=(0,0,0,0), *grps):
     Element.__init__(self,grps)
-    self.rect = hitbox
+    try:
+      self.rect
+    except AttributeError: 
+      self.rect = hitbox
     self.pos = pygame.Vector2(self.rect.x,self.rect.y)
     self.vel = pygame.Vector2()
     self.acc = pygame.Vector2()
   
   def update_position(self,dt):
-    Physics.CompVelocity(dt,self.acc,self.vel)
     Physics.CompPosition(dt,self.acc,self.vel,self.pos)
+    Physics.CompVelocity(dt,self.acc,self.vel)
+  def update_collisions(self):
+    pass
   def set_velovity(self,vec):
     self.vel = vec
+  def set_position(self, vec):
+    self.pos.x=vec.x
+    self.pos.y=vec.y
+
+  def update_rect(self):
+    self.rect.x = self.pos.x
+    self.rect.y = self.pos.y
+    
   def update(self,dt):
     
     self.update_position(dt)
-    self.rect.x = self.pos.x
-    self.rect.y = self.pos.y
+    self.update_rect()
     # print(Physics.VelDirection(self.vel))
     
   

@@ -1,91 +1,53 @@
 from math import *
-
+from elementos.element import Element,PhysicElement
+from fisicas.physics import Physics
 import pygame
 
-
-class Arrow():
+import math
+class Arrow(Element):
   points: tuple[pygame.Vector2]
   TIP_VALUES = (8,8)
-  def __init__(self,root=(0,0),angle=0, length=0, width=1, scale=1,color=(255,255,255)):
-    self.root = pygame.Vector2(root)
-    self.angle = radians(angle)
-    self.length = length
-    self.width = width
-    self.scale = scale
-    self.color = color
-    self.lines = []
-
-  def new_set(self,root=(0,0),angle=0, length=0, width=1, scale=1,color=(255,255,255)):
-    self.root = pygame.Vector2(root)
-    self.angle = radians(angle)
-    self.length = abs(length)
-    self.width = width
-    self.scale = scale
-    self.color = color
-    self.lines = []
-    self.update()
-  def setRoot(self,root):
+  def __init__(self,vec=pygame.Vector2(),root=pygame.Vector2(), width=1, scale=1,color=(255,0,255),*grps):
+    Element.__init__(self,grps)
     self.root = root
-    self.update()
-  def setAngle(self,angle):
-    self.angle = angle
-    self.update()
-  def setLength(self,length):
-    self.length = abs(length)
-    self.update()
-  def setWidth(self,width):
+    self.vec = vec
     self.width = width
-    self.update()
-  def setScale(self,scale):
-    self.scale = scale
-    self.update()
-  def setColor(self,color):
+    self.scale =scale
     self.color = color
-    self.update()
+    self.font = pygame.font.Font(pygame.font.get_default_font(),int(scale*70))
+    self.lines = []
+    self.obj = None
+  def bind_object(self,obj:PhysicElement):
+    self.obj = obj
+    return self  
+  def update_vec(self):
+    self.vec = self.obj.vel
+    line:pygame.Vector2 = self.root+(self.vec*self.scale)  
 
-
-  def update(self):
+    
+    self.lines.append(line)
+    
+    
+  def compDraw(self,ventana):
+    
+    pygame.draw.lines(ventana,self.color,False,
+      self.lines,self.width
+    )
+  def update(self,dt):
     self.lines.clear()
-    self.compute_unitary()
-    self.compute_mainv()
-    self.compute_end()
-    self.compute_lines()
+    self.root = self.obj.rect.center
+    self.lines.append(self.root)
+    self.update_vec()
+  def render(self,ventana:pygame.Surface):
+    # super().render(ventana)
+    self.compDraw(ventana)
+    
+    text = self.font.render(f"{round(self.vec.magnitude(),2)}",True,pygame.Vector3(self.color)*0.7)
+    # rotation = -Physics.VelDirection(self.vec)
+    # if rotation%360>=90 and rotation%360<=270: rotation-=180
+    # text = pygame.transform.rotate(text,rotation)
+    ventana.blit(text,pygame.Vector2(self.obj.rect.center)+((Physics.UP*self.obj.rect.h/1.5)))
 
-  def render_lines(self,ventana):
-    for i in self.lines:
-      pygame.draw.line(ventana,self.color,i[0],i[1],self.scale*self.width)
-
-  def compute_unitary(self):
-    self.unitary = self.scale*pygame.Vector2(
-      cos(self.angle),
-      sin(self.angle)
-    )
-  def compute_mainv(self):
-    self.vec = self.unitary*self.length
-  def compute_end(self):
-    self.end = self.root+self.vec
-  def compute_lines(self):
-    self.compute_mainline()
-    self.compute_tip()
-  
-  def compute_mainline(self):
-    self.lines.append((self.root,self.end))
-  
-  def compute_tip(self):
-
-    directriz = self.end-(self.unitary*Arrow.TIP_VALUES[0])
-    normal = self.unitary.rotate(90)*Arrow.TIP_VALUES[1]
-
-    self.lines.append(
-      (
-        directriz+normal,
-        self.end
-      )
-    )
-    self.lines.append(
-      (
-        directriz-normal,
-        self.end
-      )
-    )
+    
+    
   

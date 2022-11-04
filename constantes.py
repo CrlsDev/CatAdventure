@@ -5,4 +5,3 @@ img_resortera = "./Assets/Resortera.png"
 
 POTENCIA = 20
 RADIO_MAX = 150
-

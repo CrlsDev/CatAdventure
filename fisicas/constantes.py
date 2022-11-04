@@ -1,1 +1,1 @@
-POTENCIA = 4
+POTENCIA = 5.3

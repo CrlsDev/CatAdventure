@@ -12,12 +12,12 @@ TODO:
 5. 
 """
 
-UP = pygame.Vector2(0,-1)
-DOWN = pygame.Vector2(0,1)
-LEFT = pygame.Vector2(-1,0)
-RIGHT = pygame.Vector2(1,0)
 
 class Physics():
+  UP = pygame.Vector2(0,-1)
+  DOWN = pygame.Vector2(0,1)
+  LEFT = pygame.Vector2(-1,0)
+  RIGHT = pygame.Vector2(1,0)
   def __init__(self):
     pass
   def betweenRect(point, rect):
@@ -29,8 +29,10 @@ class Physics():
     return n>=r[0] and n<=r[1]
   def CompPosition(dt,acc,vel,pos):
     pos += ((acc/2)*dt*dt)+(vel*dt)
+    return pos
   def CompVelocity(dt, acc, vel):
     vel += acc*dt
+    return vel
 
   def MParabolico():
     pass
@@ -41,9 +43,9 @@ class Physics():
       math.sin(rad)
     )
   def VelDirection(vec):
-    return -math.degrees(math.atan2(vec.y,vec.x))
+    return math.degrees(math.atan2(vec.y,vec.x))
     
-  def CalcPotencia(dir):
+  def CalcPotencia(dir)->pygame.Vector2:
     return (POTENCIA*dir)
 
   def CalcVecDir(mouse:pygame.Vector2,center:pygame.Vector2):

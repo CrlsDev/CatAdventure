@@ -30,7 +30,7 @@ class Loader():
     self.container = AssetsContainer()
 
     
-  def getImage(self,image:str):
+  def getImage(self,image:str)->pygame.Surface:
     if self.container.check_images(image):
       return self.container.images[image]
   def __getDir(self,key):

@@ -12,6 +12,11 @@ class AbstractState(ABC):
     """
     Este metodo sirve como un constructor secundario para inicializar parametros del estado
     """
+  
+  def reset(self):
+    """
+    regresara el estado a su momento inicial relativo
+    """
   def handle_events(self):
     self.EvnMng.handle()
   
